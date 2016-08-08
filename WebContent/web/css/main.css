@@ -1,0 +1,17 @@
+@charset "UTF-8";
+body {
+	font-family: 'YaHei Consolas Hybrid','微软雅黑';
+	font-size: 16px;
+}
+#navbar-container {
+	background-image: linear-gradient(to bottom,#000,#1A1A1A);
+}
+#navbar-brand:hover {
+	color: #fff;
+}
+#navbar-nav li a {
+	color: #fff;
+}
+#navbar-nav li a:hover {
+	color: #E5E5E5;
+}

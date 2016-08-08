@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@page import="com.leo.model.User"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -15,8 +16,9 @@
 		Cookie[] cookies = request.getCookies();
 		for(int i=0; cookies!=null&&i<cookies.length; i++) {
 			if(cookies[i].getName().equals("user")) {
-				userName = cookies[i].getValue().split("-")[0];
-				password = cookies[i].getValue().split("-")[1];
+				userName = URLDecoder.decode(cookies[i].getValue(),"utf-8").split("-")[0];
+				password = URLDecoder.decode(cookies[i].getValue(),"utf-8").split("-")[1];
+				break;
 			}
 		}
 		if("null".equals(userName)||userName==null) {
@@ -34,34 +36,34 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Sign In - Online Diary</title>
-	<link rel="icon" href="web/images/web-icon.png" type="image/x-icon"/>
+	<link rel="icon" href="${pageContext.request.contextPath}/web/images/web-icon.png" type="image/x-icon"/>
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-theme.min.css" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 	
-	<link type="text/css" rel="stylesheet" href="web/css/login.css" />
-	<script type="text/javascript" src="web/js/login.js"></script>
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/web/css/login.css" />
+	<script type="text/javascript" src="${pageContext.request.contextPath}/web/js/login.js"></script>
 </head>
 <body>
 	<div class="container">
 		<form role="form" id="loginForm" class="form-signin" action="login" method="post">
-			<h1 class="form-signin-heading">屌丝日记</h1>
+			<h1 class="form-signin-heading">猿日记</h1>
 			<br>
 			<div class="form-group">
 				<div class="input-group">
 					<div class="input-group-addon">
-						<img alt="Username" src="web/images/user_icon.png">
+						<img alt="Username" src="${pageContext.request.contextPath}/web/images/user_icon.png">
 					</div>
-					<input  type="text" style="margin: 0px;" class="form-control" id="userName" name="userName" value="${user.getUserName()}" placeholder="屌丝名...">
+					<input  type="text" style="margin: 0px;" class="form-control" id="userName" name="userName" value="${user.getUserName()}" placeholder="猿名...">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="input-group">
 					<div class="input-group-addon">
-						<img alt="password" src="web/images/password_icon.png">
+						<img alt="password" src="${pageContext.request.contextPath}/web/images/password_icon.png">
 					</div>
-					<input  type="password" style="margin-bottom: 0px;" class="form-control" id="password" name="password" value="${user.getPassword()}" placeholder="屌丝码..." >
+					<input  type="password" style="margin-bottom: 0px;" class="form-control" id="password" name="password" value="${user.getPassword()}" placeholder="猿码..." >
 				</div>
 			</div>
 			<div class="form-group">

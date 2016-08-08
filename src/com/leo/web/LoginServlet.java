@@ -1,6 +1,8 @@
 package com.leo.web;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -49,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 					rememberMe(userName,password,response);
 				}
 				session.setAttribute("currentUser", currentUser);
-				response.sendRedirect("main.jsp");
+				request.getRequestDispatcher("main").forward(request, response);
 			}
 		}catch (ClassNotFoundException | SQLException | NoSuchAlgorithmException e) {
 			e.printStackTrace();
@@ -69,13 +71,23 @@ public class LoginServlet extends HttpServlet {
 	 * @param response
 	 */
 	private void rememberMe(String userName, String password, HttpServletResponse response) {
-		Cookie user = new Cookie("user", userName+"-"+password);
+		Cookie user = null;
+		try { //cookie值中不允许出现中文，所以需要进行转编码。页面取值时，再次解码就OK了
+			user = new Cookie("user", URLEncoder.encode(userName+"-"+password, "utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		user.setMaxAge(1*60*60*24*7); //cookie时间设为一星期
 		response.addCookie(user);
 	}
 	private void rememberMe(String userName, HttpServletResponse response) {
 		String password = null;
-		Cookie user = new Cookie("user", userName+"-"+password);
+		Cookie user = null;
+		try {
+			user = new Cookie("user", URLEncoder.encode(userName+"-"+password, "utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		user.setMaxAge(1*60*60*24*7); //cookie时间设为一星期
 		response.addCookie(user);
 	}
