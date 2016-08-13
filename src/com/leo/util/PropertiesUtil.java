@@ -5,9 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertiesUtil {
-	private PropertiesUtil() {
-		super();
-	}
+	private PropertiesUtil() {}
 	
 	/**
 	 * 根据键获取配置文件中的键值

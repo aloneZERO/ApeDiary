@@ -17,21 +17,27 @@
 </head>
 <body>
 	<!-- 导航栏 start -->
-	<div class="navbar navbar-default" role="navigation" style="border:0px;">
+	<nav class="navbar navbar-inverse" role="navigation" id="navbar">
 		<div class="container-fluid" id="navbar-container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#" id="navbar-brand">猿的日记本</a>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#diary-navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" id="navbar-brand">猿事</a>
 			</div>
-			<div class="collapse navbar-collapse">
+			<div class="collapse navbar-collapse" id="diary-navbar-collapse">
 				<ul class="nav navbar-nav" id="navbar-nav">
-					<li>
+					<li class="active">
 						<a href="#"><i class="glyphicon glyphicon-home"></i>&nbsp;主页</a>
 					</li>
 					<li>
 						<a href="#"><i class="glyphicon glyphicon-pencil"></i>&nbsp;写日记</a>
 					</li>
 					<li>
-						<a href="#"><i class="glyphicon glyphicon-book"></i>&nbsp;日记分类管理</a>
+						<a href="#"><i class="glyphicon glyphicon-book"></i>&nbsp;分类管理</a>
 					</li>
 					<li>
 						<a href="#"><i class="glyphicon glyphicon-user"></i>&nbsp;个人中心</a>
@@ -47,7 +53,7 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	</nav>
 	<!-- 导航栏 end -->
 	
 	<!-- 主体内容 start -->

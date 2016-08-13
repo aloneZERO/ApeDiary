@@ -3,7 +3,13 @@ body {
 	font-family: 'YaHei Consolas Hybrid','微软雅黑';
 	font-size: 16px;
 }
-#navbar-container {
+#navbar {
+	border-radius:0px;
+}
+#navbar-brand {
+	font-size: 25px;
+}
+/* #navbar-container {
 	background-image: linear-gradient(to bottom,#000,#1A1A1A);
 }
 #navbar-brand:hover {
@@ -14,4 +20,4 @@ body {
 }
 #navbar-nav li a:hover {
 	color: #E5E5E5;
-}
+} */

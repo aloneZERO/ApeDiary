@@ -26,9 +26,8 @@ public class DbUtil {
 	 */
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName(PropertiesUtil.getValue("jdbcName"));
-		Connection conn = DriverManager.getConnection(PropertiesUtil.getValue("dbUrl"),
+		return DriverManager.getConnection(PropertiesUtil.getValue("dbUrl"),
 				PropertiesUtil.getValue("dbUsername"),PropertiesUtil.getValue("dbPassword"));
-		return conn;
 	}
 	
 	/**

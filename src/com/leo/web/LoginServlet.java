@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 		response.addCookie(user);
 	}
 	private void rememberMe(String userName, HttpServletResponse response) {
-		String password = null;
+		String password = "null";
 		Cookie user = null;
 		try {
 			user = new Cookie("user", URLEncoder.encode(userName+"-"+password, "utf-8"));
