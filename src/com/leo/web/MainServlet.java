@@ -10,8 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.leo.dao.DiaryDao;
+import com.leo.dao.DiaryTypeDao;
 import com.leo.model.Diary;
 import com.leo.model.PageBean;
 import com.leo.util.DbUtil;
@@ -21,6 +23,7 @@ import com.leo.util.StringUtil;
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DiaryDao diaryDao = new DiaryDao();
+	private DiaryTypeDao diaryTypeDao = new DiaryTypeDao();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,6 +35,7 @@ public class MainServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
 		String page = request.getParameter("page");
 		if(StringUtil.isEmpty(page)) {
 			page = "1";
@@ -45,6 +49,8 @@ public class MainServlet extends HttpServlet {
 			String pageCode = this.getPagination(total, pageBean.getPage(), pageBean.getPageSize());
 			request.setAttribute("pageCode", pageCode);
 			request.setAttribute("diaryList", diaryList);
+			session.setAttribute("diaryTypeCountList", diaryTypeDao.diaryTypeCountList(conn));
+			session.setAttribute("diaryCountList", diaryDao.diaryCountList(conn));
 			request.setAttribute("mainPage", "diary/diaryList.jsp");
 			request.getRequestDispatcher("main.jsp").forward(request, response);
 		} catch (ClassNotFoundException | SQLException | ParseException e) {

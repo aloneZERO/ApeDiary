@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -64,6 +65,27 @@ public class DiaryDao {
 		}else {
 			return 0;
 		}
+	}
+	
+	/**
+	 * 按日期返回日记总信息表
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<Diary> diaryCountList(Connection con) throws SQLException {
+		List<Diary> diaryCountList = new ArrayList<Diary>();
+		String sql="SELECT DATE_FORMAT(releaseDate,'%Y年%m月') as releaseDateStr ,COUNT(*) AS diaryCount  FROM t_diary "
+				+ "GROUP BY DATE_FORMAT(releaseDate,'%Y年%m月') ORDER BY DATE_FORMAT(releaseDate,'%Y年%m月') DESC";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()) {
+			Diary diary = new Diary();
+			diary.setReleaseDateStr(rs.getString("releaseDateStr"));
+			diary.setDiaryCount(rs.getInt("diaryCount"));
+			diaryCountList.add(diary);
+		}
+		return diaryCountList;
 	}
 	
 }

@@ -26,7 +26,9 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#" id="navbar-brand">猿事</a>
+				<a class="navbar-brand" href="#" id="navbar-brand">
+					<img alt="Brand" src="${pageContext.request.contextPath}/web/images/diary_brand.png">
+				</a>
 			</div>
 			<div class="collapse navbar-collapse" id="diary-navbar-collapse">
 				<ul class="nav navbar-nav" id="navbar-nav">
@@ -81,14 +83,32 @@
 						<img src="${pageContext.request.contextPath}/web/images/byType_icon.png"/>
 						按日记类别
 					</div>
+					<div class="datas">
+						<ul>
+							<c:forEach var="diaryTypeCount" items="${diaryTypeCountList}">
+								<li>
+									<span><a href="#">${diaryTypeCount.typeName}(${diaryTypeCount.diaryCount})</a></span>
+								</li>
+							</c:forEach>
+						</ul>
+					</div>
 				</div>
 				<!-- 按日记类别 end -->
 
 				<!-- 日记日期 start -->
-				<div class="data_list">
+				<div class="data_list" style="margin-bottom: 15px;">
 					<div class="data_list_title">
 						<img src="${pageContext.request.contextPath}/web/images/byDate_icon.png"/>
 						按日记日期
+					</div>
+					<div class="datas">
+						<ul>
+							<c:forEach var="diaryCount" items="${diaryCountList}">
+								<li>
+									<span><a href="#">${diaryCount.releaseDateStr}(${diaryCount.diaryCount})</a></span>
+								</li>
+							</c:forEach>
+						</ul>
 					</div>
 				</div>
 				<!-- 日记日期 end -->
