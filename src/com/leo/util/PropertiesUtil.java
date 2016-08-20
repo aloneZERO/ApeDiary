@@ -10,7 +10,7 @@ public class PropertiesUtil {
 	/**
 	 * 根据键获取配置文件中的键值
 	 * @param key
-	 * @return
+	 * @return 键值字符串
 	 */
 	public static String getValue(String key) {
 		Properties prop = new Properties();

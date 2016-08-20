@@ -12,6 +12,7 @@ import java.util.List;
 import com.leo.model.Diary;
 import com.leo.model.PageBean;
 import com.leo.util.DateUtil;
+import com.leo.util.StringUtil;
 
 /**
  * 日记Dao类
@@ -21,18 +22,27 @@ import com.leo.util.DateUtil;
 public class DiaryDao {
 	
 	/**
-	 * 获得日记列表
+	 * 返回日记列表
 	 * @param conn
 	 * @param pageBean
 	 * @return
 	 * @throws SQLException 
 	 * @throws ParseException 
 	 */
-	public List<Diary> diaryList(Connection conn, PageBean pageBean)throws SQLException, ParseException {
+	public List<Diary> diaryList(Connection conn, PageBean pageBean, Diary s_diary)throws SQLException, ParseException {
 		List<Diary> diaryList = new LinkedList<>();
 		StringBuilder sql = new StringBuilder("select * from t_diary as td,t_diaryType as tdt "
 				+ "where td.typeId=tdt.diaryTypeId ");
-		sql.append("order by td.releaseDate desc");
+		if(StringUtil.isNotEmpty(s_diary.getTitle())) {
+			sql.append(" and td.title like '%"+s_diary.getTitle()+"%'");
+		}
+		if(s_diary.getTypeId()!=-1) {
+			sql.append(" and td.typeId="+s_diary.getTypeId());
+		}
+		if(StringUtil.isNotEmpty(s_diary.getReleaseDateStr())) {
+			sql.append(" and DATE_FORMAT(td.releaseDate,'%Y年%m月')='"+s_diary.getReleaseDateStr()+"'");
+		}
+		sql.append(" order by td.releaseDate DESC");
 		if(pageBean != null) {
 			sql.append(" limit "+pageBean.getStart()+","+pageBean.getPageSize());
 		}
@@ -43,21 +53,30 @@ public class DiaryDao {
 			diary.setDiaryId(rs.getInt("diaryId"));
 			diary.setTitle(rs.getString("title"));
 			diary.setContent(rs.getString("content"));
-			diary.setReleaseDate(DateUtil.formatString(rs.getString("releaseDate"), "yyyy-MM-dd HH:mm:ss"));
+			diary.setReleaseDate(DateUtil.formatString(rs.getString("releaseDate"),"yyyy-MM-dd HH:mm:ss") );
 			diaryList.add(diary);
 		}
 		return diaryList;
 	}
 	
 	/**
-	 * 获取日记总数
+	 * 返回日记总数
 	 * @param con
 	 * @return
 	 * @throws SQLException 
 	 */
-	public int diaryCount(Connection con)throws SQLException {
-		StringBuffer sql = new StringBuffer("select count(*) as total from t_diary as td,t_diaryType as tdt "
+	public int diaryCount(Connection con, Diary s_diary)throws SQLException {
+		StringBuilder sql = new StringBuilder("select count(*) as total from t_diary as td,t_diaryType as tdt "
 				+ "where td.typeId=tdt.diaryTypeId ");
+		if(StringUtil.isNotEmpty(s_diary.getTitle())) {
+			sql.append(" and td.title like '%"+s_diary.getTitle()+"%'");
+		}
+		if(s_diary.getTypeId()!=-1) {
+			sql.append(" and td.typeId="+s_diary.getTypeId());
+		}
+		if(StringUtil.isNotEmpty(s_diary.getReleaseDateStr())) {
+			sql.append(" and DATE_FORMAT(td.releaseDate,'%Y年%m月')='"+s_diary.getReleaseDateStr()+"'");
+		}
 		PreparedStatement pstmt = con.prepareStatement(sql.toString());
 		ResultSet rs = pstmt.executeQuery();
 		if(rs.next()) {
@@ -68,7 +87,7 @@ public class DiaryDao {
 	}
 	
 	/**
-	 * 按日期返回日记总信息表
+	 * 按日期返回日记数量表
 	 * @param con
 	 * @return
 	 * @throws SQLException 
@@ -76,7 +95,7 @@ public class DiaryDao {
 	public List<Diary> diaryCountList(Connection con) throws SQLException {
 		List<Diary> diaryCountList = new ArrayList<Diary>();
 		String sql="SELECT DATE_FORMAT(releaseDate,'%Y年%m月') as releaseDateStr ,COUNT(*) AS diaryCount  FROM t_diary "
-				+ "GROUP BY DATE_FORMAT(releaseDate,'%Y年%m月') ORDER BY DATE_FORMAT(releaseDate,'%Y年%m月') DESC";
+				+"GROUP BY releaseDateStr ORDER BY releaseDateStr DESC";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		while(rs.next()) {

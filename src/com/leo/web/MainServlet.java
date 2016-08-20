@@ -34,9 +34,63 @@ public class MainServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
+		String back = request.getParameter("back");
+		String s_typeId = request.getParameter("s_typeId");
+		String s_releaseDateStr = request.getParameter("s_releaseDateStr");
+		String s_title = request.getParameter("s_title");
+		String all = request.getParameter("all");
 		String page = request.getParameter("page");
+		Diary diary = new Diary();
+		
+		if("true".equals(all)) {
+			if(StringUtil.isNotEmpty(s_title)) {
+				diary.setTitle(s_title);
+			}
+			session.removeAttribute("s_releaseDateStr");
+			session.removeAttribute("s_typeId");
+			session.setAttribute("s_title", s_title);
+		}else {
+			if(StringUtil.isNotEmpty(s_typeId)) {
+				diary.setTypeId(Integer.parseInt(s_typeId));
+				session.setAttribute("s_typeId", s_typeId);
+				session.removeAttribute("s_releaseDateStr");
+				session.removeAttribute("s_title");
+			}
+			if(StringUtil.isNotEmpty(s_releaseDateStr)) {
+//				s_releaseDateStr = new String(s_releaseDateStr.getBytes("gbk"),"UTF-8");
+				diary.setReleaseDateStr(s_releaseDateStr);
+				session.setAttribute("s_releaseDateStr", s_releaseDateStr);
+				session.removeAttribute("s_typeId");
+				session.removeAttribute("s_title");
+			}
+			if(StringUtil.isEmpty(s_typeId)) {
+				Object obj = session.getAttribute("s_typeId");
+				if(obj!=null) {
+					diary.setTypeId(Integer.parseInt((String)obj));
+				}
+			}
+			if(StringUtil.isEmpty(s_releaseDateStr)) {
+				Object obj = session.getAttribute("s_releaseDateStr");
+				if(obj!=null) {
+					diary.setReleaseDateStr((String)obj);
+				}
+			}
+			if(StringUtil.isEmpty(s_title)) {
+				Object obj = session.getAttribute("s_title");
+				if(obj!=null) {
+					diary.setTitle((String)obj);
+				}
+			}
+			if("home".equals(back)) {
+				session.removeAttribute("s_typeId");
+				session.removeAttribute("s_releaseDateStr");
+				session.removeAttribute("s_title");
+				diary = new Diary();
+			}
+		}
+		
 		if(StringUtil.isEmpty(page)) {
 			page = "1";
 		}
@@ -44,10 +98,10 @@ public class MainServlet extends HttpServlet {
 		PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(PropertiesUtil.getValue("pageSize")));
 		try {
 			conn = DbUtil.getConnection();
-			List<Diary> diaryList = diaryDao.diaryList(conn,pageBean);
-			int total = diaryDao.diaryCount(conn);
-			String pageCode = this.getPagination(total, pageBean.getPage(), pageBean.getPageSize());
-			request.setAttribute("pageCode", pageCode);
+			List<Diary> diaryList = diaryDao.diaryList(conn,pageBean,diary);
+			int total = diaryDao.diaryCount(conn,diary);
+			String pagination = this.getPagination(total, pageBean.getPage(), pageBean.getPageSize());
+			request.setAttribute("pagination", pagination);
 			request.setAttribute("diaryList", diaryList);
 			session.setAttribute("diaryTypeCountList", diaryTypeDao.diaryTypeCountList(conn));
 			session.setAttribute("diaryCountList", diaryDao.diaryCountList(conn));
@@ -70,11 +124,13 @@ public class MainServlet extends HttpServlet {
 	 * @param totalNum
 	 * @param currentPage
 	 * @param pageSize
-	 * @return
+	 * @return 格式化后的分页导航的 html 代码字符串
 	 */
 	private String getPagination(int totalNum,int currentPage,int pageSize) {
 		int totalPage = (totalNum%pageSize==0)?(totalNum/pageSize):(totalNum/pageSize+1);
 		StringBuilder pageCode = new StringBuilder();
+		
+		// 分页导航：首页和上一页
 		if(currentPage==1) {
 			pageCode.append("<li class='disabled'><a href='#'>首页</a></li>");
 		}else {
@@ -85,6 +141,8 @@ public class MainServlet extends HttpServlet {
 		}else {
 			pageCode.append("<li><a href='main?page="+(currentPage-1)+"'>上一页</a></li>");
 		}
+		
+		// 分页导航：数字页码
 		for(int i=currentPage-2; i<= currentPage+2; i++) {
 			if(i<1||i>totalPage) {
 				continue;
@@ -95,6 +153,8 @@ public class MainServlet extends HttpServlet {
 				pageCode.append("<li><a href='main?page="+i+"'>"+i+"</a></li>");
 			}
 		}
+		
+		// 分页导航：下一页和尾页
 		if(currentPage==totalPage) {
 			pageCode.append("<li class='disabled'><a href='#'>下一页</a></li>");
 		}else {

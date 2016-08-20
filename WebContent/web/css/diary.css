@@ -15,23 +15,37 @@
 .data_list .data_list_title img {
 	vertical-align: top;
 }
-.data_list .diary_datas{
+.data_list .diary_datas {
 	padding: 5px;
 }
-.data_list .diary_datas ul{
+.data_list .diary_datas ul {
 	list-style-type: none;
 }
-.data_list .diary_datas ul li{
+.data_list .diary_datas ul li {
 	margin-top: 15px;
 }
+
 .data_list .datas{
 	padding: 5px;
 }
-
 .data_list .datas ul {
 	list-style-type: none;
 }
 
 .data_list .datas ul li {
 	margin-top: 10px;
+}
+
+.data_list .userImage {
+	text-align: center;
+}
+.data_list .userImage img {
+	width: 100%;
+	height: 100%;
+	/* border-radius: 50%; */
+	border-radius:3px;
+	padding-top:10px;
+}
+.data_list .nickName, .data_list .userSign {
+	text-align: center;
 }

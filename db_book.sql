@@ -47,7 +47,7 @@ CREATE TABLE `t_diarytype` (
 
 /*Data for the table `t_diarytype` */
 
-insert  into `t_diarytype`(`diaryTypeId`,`typeName`) values (1,'工作类'),(2,'生活类'),(3,'学习类'),(4,'质疑人生');
+insert  into `t_diarytype`(`diaryTypeId`,`typeName`) values (1,'工作'),(2,'生活'),(3,'学习'),(4,'思考人生');
 
 /*Table structure for table `t_user` */
 
@@ -58,14 +58,14 @@ CREATE TABLE `t_user` (
   `userName` varchar(20) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   `nickName` varchar(20) DEFAULT NULL,
-  `iconName` varchar(40) DEFAULT NULL,
+  `imageName` varchar(40) DEFAULT NULL,
   `mood` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `t_user` */
 
-insert  into `t_user`(`userId`,`userName`,`password`,`nickName`,`iconName`,`mood`) values (1,'leo','4WVCERC6AwmaHAOTNzxbQw==','justZERO','HelloWorld','Good!'),(2,'zero','4WVCERC6AwmaHAOTNzxbQw==',NULL,NULL,NULL);
+insert  into `t_user`(`userId`,`userName`,`password`,`nickName`,`imageName`,`mood`) values (1,'leo','4WVCERC6AwmaHAOTNzxbQw==','justZERO','20140113081010.jpg','爱编程，更爱生活！'),(2,'zero','4WVCERC6AwmaHAOTNzxbQw==','ZERO的孤独','2016819175900.jpg','奔跑着渴望飞翔！');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

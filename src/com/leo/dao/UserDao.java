@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 import com.leo.model.User;
 import com.leo.util.Md5Util;
+import com.leo.util.PropertiesUtil;
 
 public class UserDao {
 	
@@ -33,9 +34,9 @@ public class UserDao {
 			resultUser.setUserId(rs.getInt("userId"));
 			resultUser.setUserName(rs.getString("userName"));
 			resultUser.setPassword(rs.getString("password"));
-			/*resultUser.setNickName(rs.getString("nickName"));
-			resultUser.setIconName(rs.getString("iconName"));
-			resultUser.setMood(rs.getString("mood"));*/
+			resultUser.setNickName(rs.getString("nickName"));
+			resultUser.setImageName(PropertiesUtil.getValue("userImage")+rs.getString("imageName"));
+			resultUser.setMood(rs.getString("mood"));
 		}
 		return resultUser;
 	}

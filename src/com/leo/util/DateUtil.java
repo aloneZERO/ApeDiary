@@ -17,7 +17,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String formatDate(Date date,String format) {
-		String result="";
+		String result = "";
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		if(date != null) {
 			result = sdf.format(date);
@@ -30,7 +30,7 @@ public class DateUtil {
 	 * @param str
 	 * @param format
 	 * @return
-	 * @throws ParseException  
+	 * @throws ParseException
 	 * @throws Exception
 	 */
 	public static Date formatString(String str,String format)throws ParseException {

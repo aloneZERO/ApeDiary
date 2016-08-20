@@ -26,7 +26,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#" id="navbar-brand">
+				<a class="navbar-brand" href="main?back=home" id="navbar-brand">
 					<img alt="Brand" src="${pageContext.request.contextPath}/web/images/diary_brand.png">
 				</a>
 			</div>
@@ -45,11 +45,11 @@
 						<a href="#"><i class="glyphicon glyphicon-user"></i>&nbsp;个人中心</a>
 					</li>
 				</ul>
-				<form name="myForm" class="navbar-form navbar-right" role="search" method="post" action="search">
+				<form name="myForm" class="navbar-form navbar-right" role="search" method="post" action="main?all=true">
 					<div class="form-group">
 						<input type="text" class="form-control" id="s_title" name="s_title" placeholder="追忆向...">
 						<button type="submit" class="btn btn-default" onkeydown="if(event.keyCode==13) myForm.submit()">
-							<i class="glyphicon glyphicon-search"></i>&nbsp;搜索日记
+							<i class="glyphicon glyphicon-search"></i>&nbsp;在哪呢？
 						</button>
 					</div>
 				</form>
@@ -74,6 +74,13 @@
 						<img src="${pageContext.request.contextPath}/web/images/user_icon.png"/>
 						个人中心
 					</div>
+					<div class="userImage">
+						<img src="${currentUser.getImageName() }" alt="user image"/>
+					</div>
+					<div class="nickName">
+						<a href="#">${currentUser.getNickName() }</a>
+					</div>
+					<div class="userSign">(${currentUser.getMood() })</div>
 				</div>
 				<!-- 个人中心 end -->
 
@@ -86,9 +93,9 @@
 					<div class="datas">
 						<ul>
 							<c:forEach var="diaryTypeCount" items="${diaryTypeCountList}">
-								<li>
-									<span><a href="#">${diaryTypeCount.typeName}(${diaryTypeCount.diaryCount})</a></span>
-								</li>
+								<li><span>
+										<a href="main?s_typeId=${diaryTypeCount.diaryTypeId}">${diaryTypeCount.typeName}(${diaryTypeCount.diaryCount})</a>
+								</span></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -96,7 +103,7 @@
 				<!-- 按日记类别 end -->
 
 				<!-- 日记日期 start -->
-				<div class="data_list" style="margin-bottom: 15px;">
+				<div class="data_list">
 					<div class="data_list_title">
 						<img src="${pageContext.request.contextPath}/web/images/byDate_icon.png"/>
 						按日记日期
@@ -104,9 +111,9 @@
 					<div class="datas">
 						<ul>
 							<c:forEach var="diaryCount" items="${diaryCountList}">
-								<li>
-									<span><a href="#">${diaryCount.releaseDateStr}(${diaryCount.diaryCount})</a></span>
-								</li>
+								<li><span>
+										<a href="main?s_releaseDateStr=${diaryCount.releaseDateStr}">${diaryCount.releaseDateStr}(${diaryCount.diaryCount})</a>
+								</span></li>
 							</c:forEach>
 						</ul>
 					</div>

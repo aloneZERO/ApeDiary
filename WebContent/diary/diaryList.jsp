@@ -10,15 +10,16 @@
 		<div class="diary_datas">
 			<ul>
 				<c:forEach var="diary" items="${diaryList }">
-					<li>『<fmt:formatDate value="${diary.releaseDate }" type="date" pattern="yyyy-MM-dd"/>』
+					<li>
+						『<fmt:formatDate value="${diary.releaseDate }" type="date" pattern="yyyy-MM-dd"/>』
 						<span>&nbsp;<a href="#">${diary.title }</a></span>
 					</li>
 				</c:forEach>
 			</ul>
 		</div>
 		<div class="row">
-			<nav class="col-md-6 col-md-offset-3">
-				<ul class="pagination">${pageCode}</ul>
+			<nav class="col-md-8 col-md-offset-2">
+				<ul class="pagination">${pagination }</ul>
 			</nav>
 		</div>
 </div>

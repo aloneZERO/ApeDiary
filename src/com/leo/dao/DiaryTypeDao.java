@@ -17,7 +17,7 @@ import com.leo.model.DiaryType;
 public class DiaryTypeDao {
 	
 	/**
-	 * 返回总日记类别信息表
+	 * 返回日记类别日记数量表
 	 * @param conn
 	 * @param diaryType
 	 * @return

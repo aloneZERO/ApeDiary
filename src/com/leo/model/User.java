@@ -10,7 +10,7 @@ public class User {
 	private String userName;
 	private String password;
 	private String nickName;
-	private String iconName;
+	private String imageName;
 	private String mood;
 	
 	
@@ -47,17 +47,17 @@ public class User {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	public String getIconName() {
-		return iconName;
-	}
-	public void setIconName(String iconName) {
-		this.iconName = iconName;
-	}
 	public String getMood() {
 		return mood;
 	}
 	public void setMood(String mood) {
 		this.mood = mood;
+	}
+	public String getImageName() {
+		return imageName;
+	}
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 	
 }
