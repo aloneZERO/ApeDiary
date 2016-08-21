@@ -107,4 +107,30 @@ public class DiaryDao {
 		return diaryCountList;
 	}
 	
+	/**
+	 * 返回当前需要显示的日记实体
+	 * @param conn
+	 * @param diaryId
+	 * @return 查询的日记实体
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
+	public Diary diaryShow(Connection conn,int diaryId) throws SQLException, ParseException {
+		String sql = "select * from t_diary as td,t_diaryType as tdt "
+				+ "where td.typeId=tdt.diaryTypeId "
+				+ "and td.diaryId=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, diaryId);
+		ResultSet rs = pstmt.executeQuery();
+		Diary currentDiary = new Diary();
+		while(rs.next()) {
+			currentDiary.setDiaryId(rs.getInt("diaryId"));
+			currentDiary.setTitle(rs.getString("title"));
+			currentDiary.setContent(rs.getString("content"));
+			currentDiary.setTypeId(rs.getInt("typeId"));
+			currentDiary.setTypeName(rs.getString("typeName"));
+			currentDiary.setReleaseDate(DateUtil.formatString(rs.getString("releaseDate"),"yyyy-MM-dd HH:mm:ss"));
+		}
+		return currentDiary;
+	}
 }

@@ -33,25 +33,25 @@
 			<div class="collapse navbar-collapse" id="diary-navbar-collapse">
 				<ul class="nav navbar-nav" id="navbar-nav">
 					<li class="active">
-						<a href="#"><i class="glyphicon glyphicon-home"></i>&nbsp;主页</a>
+						<a href="#"><span class="glyphicon glyphicon-home"></span>&nbsp;主页</a>
 					</li>
 					<li>
-						<a href="#"><i class="glyphicon glyphicon-pencil"></i>&nbsp;写日记</a>
+						<a href="#"><span class="glyphicon glyphicon-pencil"></span>&nbsp;写日记</a>
 					</li>
 					<li>
-						<a href="#"><i class="glyphicon glyphicon-book"></i>&nbsp;分类管理</a>
+						<a href="#"><span class="glyphicon glyphicon-book"></span>&nbsp;分类管理</a>
 					</li>
 					<li>
-						<a href="#"><i class="glyphicon glyphicon-user"></i>&nbsp;个人中心</a>
+						<a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;个人中心</a>
 					</li>
 				</ul>
 				<form name="myForm" class="navbar-form navbar-right" role="search" method="post" action="main?all=true">
 					<div class="form-group">
 						<input type="text" class="form-control" id="s_title" name="s_title" placeholder="追忆向...">
-						<button type="submit" class="btn btn-default" onkeydown="if(event.keyCode==13) myForm.submit()">
-							<i class="glyphicon glyphicon-search"></i>&nbsp;在哪呢？
-						</button>
 					</div>
+					<button type="submit" class="btn btn-default" onkeydown="if(event.keyCode==13) myForm.submit()">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
 				</form>
 			</div>
 		</div>

@@ -11,14 +11,14 @@
 			<ul>
 				<c:forEach var="diary" items="${diaryList }">
 					<li>
-						『<fmt:formatDate value="${diary.releaseDate }" type="date" pattern="yyyy-MM-dd"/>』
-						<span>&nbsp;<a href="#">${diary.title }</a></span>
+						『<fmt:formatDate value="${diary.releaseDate}" type="date" pattern="yyyy-MM-dd"/>』
+						<span>&nbsp;<a href="diary?action=show&diaryId=${diary.diaryId}">${diary.title }</a></span>
 					</li>
 				</c:forEach>
 			</ul>
 		</div>
 		<div class="row">
-			<nav class="col-md-8 col-md-offset-2">
+			<nav class="col-md-offset-2">
 				<ul class="pagination">${pagination }</ul>
 			</nav>
 		</div>
