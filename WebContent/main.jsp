@@ -11,6 +11,7 @@
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-theme.min.css" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/web/js/ckeditor/ckeditor.js"></script>
 	
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/web/css/main.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/web/css/diary.css" />
@@ -32,11 +33,11 @@
 			</div>
 			<div class="collapse navbar-collapse" id="diary-navbar-collapse">
 				<ul class="nav navbar-nav" id="navbar-nav">
-					<li class="active">
-						<a href="#"><span class="glyphicon glyphicon-home"></span>&nbsp;主页</a>
+					<li>
+						<a href="main?all=true"><span class="glyphicon glyphicon-home"></span>&nbsp;主页</a>
 					</li>
 					<li>
-						<a href="#"><span class="glyphicon glyphicon-pencil"></span>&nbsp;写日记</a>
+						<a href="diary?action=preSave"><span class="glyphicon glyphicon-pencil"></span>&nbsp;写日记</a>
 					</li>
 					<li>
 						<a href="#"><span class="glyphicon glyphicon-book"></span>&nbsp;分类管理</a>
@@ -47,7 +48,7 @@
 				</ul>
 				<form name="myForm" class="navbar-form navbar-right" role="search" method="post" action="main?all=true">
 					<div class="form-group">
-						<input type="text" class="form-control" id="s_title" name="s_title" placeholder="追忆向...">
+						<input type="text" class="form-control" id="s_title" name="s_title" placeholder="天地无极，万里追踪...">
 					</div>
 					<button type="submit" class="btn btn-default" onkeydown="if(event.keyCode==13) myForm.submit()">
 						<span class="glyphicon glyphicon-search"></span>
@@ -75,12 +76,12 @@
 						个人中心
 					</div>
 					<div class="userImage">
-						<img src="${currentUser.getImageName() }" alt="user image"/>
+						<img src="${currentUser.imageName}" alt="user image"/>
 					</div>
 					<div class="nickName">
-						<a href="#">${currentUser.getNickName() }</a>
+						<a href="#">${currentUser.nickName}</a>
 					</div>
-					<div class="userSign">(${currentUser.getMood() })</div>
+					<div class="userSign">(${currentUser.mood})</div>
 				</div>
 				<!-- 个人中心 end -->
 

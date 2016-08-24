@@ -90,7 +90,7 @@ public class DiaryDao {
 	 * 按日期返回日记数量表
 	 * @param con
 	 * @return
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public List<Diary> diaryCountList(Connection con) throws SQLException {
 		List<Diary> diaryCountList = new ArrayList<Diary>();
@@ -132,5 +132,52 @@ public class DiaryDao {
 			currentDiary.setReleaseDate(DateUtil.formatString(rs.getString("releaseDate"),"yyyy-MM-dd HH:mm:ss"));
 		}
 		return currentDiary;
+	}
+	
+	/**
+	 * 添加日记
+	 * @param conn
+	 * @param diary
+	 * @return 添加日记成功的条数
+	 * @throws SQLException
+	 */
+	public int diaryAdd(Connection conn, Diary diary) throws SQLException {
+		String sql = "insert into t_diary value(null,?,?,?,now())";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, diary.getTitle());
+		pstmt.setString(2, diary.getContent());
+		pstmt.setInt(3, diary.getTypeId());
+		return pstmt.executeUpdate();
+	}
+	
+	/**
+	 * 更新日记
+	 * @param conn
+	 * @param newDiary
+	 * @return 更新日记成功的条数
+	 * @throws SQLException
+	 */
+	public int diaryUpdate(Connection conn,Diary newDiary) throws SQLException {
+		String sql = "update t_diary set title=?,content=?,typeId=? where diaryId=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, newDiary.getTitle());
+		pstmt.setString(2, newDiary.getContent());
+		pstmt.setInt(3, newDiary.getTypeId());
+		pstmt.setInt(4, newDiary.getDiaryId());
+		return pstmt.executeUpdate();
+	}
+	
+	/**
+	 * 删除日记
+	 * @param conn
+	 * @param diary
+	 * @return 删除日记成功的条数
+	 * @throws SQLException
+	 */
+	public int diaryDel(Connection conn,int diaryId) throws SQLException {
+		String sql = "delete from t_diary where diaryId=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, diaryId);
+		return pstmt.executeUpdate();
 	}
 }
