@@ -40,7 +40,7 @@
 						<a href="diary?action=preSave"><span class="glyphicon glyphicon-pencil"></span>&nbsp;写日记</a>
 					</li>
 					<li>
-						<a href="#"><span class="glyphicon glyphicon-book"></span>&nbsp;分类管理</a>
+						<a href="diaryType?action=list"><span class="glyphicon glyphicon-book"></span>&nbsp;类别管理</a>
 					</li>
 					<li>
 						<a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;个人中心</a>

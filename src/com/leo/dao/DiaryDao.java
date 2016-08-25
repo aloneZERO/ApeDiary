@@ -142,7 +142,7 @@ public class DiaryDao {
 	 * @throws SQLException
 	 */
 	public int diaryAdd(Connection conn, Diary diary) throws SQLException {
-		String sql = "insert into t_diary value(null,?,?,?,now())";
+		String sql = "insert into t_diary values(null,?,?,?,now())";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, diary.getTitle());
 		pstmt.setString(2, diary.getContent());
@@ -179,5 +179,21 @@ public class DiaryDao {
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, diaryId);
 		return pstmt.executeUpdate();
+	}
+	
+	/**
+	 * 判断指定日记类别下是否存在日记
+	 * @param conn
+	 * @param typeId
+	 * @return 存在日记返回 true, 否则返回 false
+	 * @throws SQLException
+	 */
+	public boolean existDiaryWithTypeId(Connection conn,int typeId) throws SQLException {
+		String sql = "select * from t_diary where typeId=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, typeId);
+		ResultSet rs = pstmt.executeQuery();
+		if(rs.next()) return true;
+		else          return false;
 	}
 }

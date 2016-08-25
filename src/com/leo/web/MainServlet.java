@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -98,11 +97,10 @@ public class MainServlet extends HttpServlet {
 		PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(PropertiesUtil.getValue("pageSize")));
 		try {
 			conn = DbUtil.getConnection();
-			List<Diary> diaryList = diaryDao.diaryList(conn,pageBean,diary);
 			int total = diaryDao.diaryCount(conn,diary);
 			String pagination = this.getPagination(total, pageBean.getPage(), pageBean.getPageSize());
 			request.setAttribute("pagination", pagination);
-			request.setAttribute("diaryList", diaryList);
+			request.setAttribute("diaryList", diaryDao.diaryList(conn,pageBean,diary));
 			session.setAttribute("diaryTypeCountList", diaryTypeDao.diaryTypeCountList(conn));
 			session.setAttribute("diaryCountList", diaryDao.diaryCountList(conn));
 			request.setAttribute("mainPage", "diary/diaryList.jsp");

@@ -10,6 +10,15 @@ public class DiaryType {
 	private String typeName;
 	private int diaryCount;
 	
+	
+	public DiaryType() {
+		super();
+	}
+	public DiaryType(String typeName) {
+		super();
+		this.typeName = typeName;
+	}
+	
 	public int getDiaryTypeId() {
 		return diaryTypeId;
 	}
