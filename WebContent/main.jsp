@@ -43,7 +43,7 @@
 						<a href="diaryType?action=list"><span class="glyphicon glyphicon-book"></span>&nbsp;类别管理</a>
 					</li>
 					<li>
-						<a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;个人中心</a>
+						<a href="user?action=preSave"><span class="glyphicon glyphicon-user"></span>&nbsp;个人中心</a>
 					</li>
 				</ul>
 				<form name="myForm" class="navbar-form navbar-right" role="search" method="post" action="main?all=true">
@@ -76,10 +76,10 @@
 						个人中心
 					</div>
 					<div class="userImage">
-						<img src="${currentUser.imageName}" alt="user image"/>
+						<img src="${currentUser.imageName}" alt="user image" style="border-radius:5px;"/>
 					</div>
 					<div class="nickName">
-						<a href="#">${currentUser.nickName}</a>
+						<a href="user?action=preSave">${currentUser.nickName}</a>
 					</div>
 					<div class="userSign">(${currentUser.mood})</div>
 				</div>

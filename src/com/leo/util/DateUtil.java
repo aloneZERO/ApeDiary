@@ -14,7 +14,7 @@ public class DateUtil {
 	 * 格式化日期
 	 * @param date
 	 * @param format
-	 * @return
+	 * @return 格式化后日期
 	 */
 	public static String formatDate(Date date,String format) {
 		String result = "";
@@ -29,7 +29,7 @@ public class DateUtil {
 	 * 格式化字符串
 	 * @param str
 	 * @param format
-	 * @return
+	 * @return 格式化后字符串
 	 * @throws ParseException
 	 * @throws Exception
 	 */
@@ -38,5 +38,16 @@ public class DateUtil {
 			return null;
 		}
 		return new SimpleDateFormat(format).parse(str);
+	}
+	
+	/**
+	 * 获取当前时间格式化字符串：
+	 * 用于为上传文件命名。
+	 * @return 例如：2016827173418
+	 */
+	public static String getCurrentDateStr() {
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+		return sdf.format(date);
 	}
 }

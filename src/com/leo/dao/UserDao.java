@@ -40,4 +40,23 @@ public class UserDao {
 		}
 		return resultUser;
 	}
+	
+	/**
+	 * 用户信息更新
+	 * @param conn
+	 * @param user
+	 * @return 用户信息更新成功的条数
+	 * @throws SQLException
+	 */
+	public int userUpdate(Connection conn,User user) throws SQLException {
+		String sql = "update t_user set nickName=?,imageName=?,mood=? where userId=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, user.getNickName());
+		pstmt.setString(2, user.getImageName());
+		pstmt.setString(3, user.getMood());
+		pstmt.setInt(4, user.getUserId());
+		return pstmt.executeUpdate();
+	}
+	
+	
 }
