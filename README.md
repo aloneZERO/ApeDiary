@@ -1,11 +1,19 @@
-# OnlineDiary
-**Save your diaries, Manage your diaries~**
+# LeoDiary
+**A Simple Diary App**
 
 ### Home Page
-![OnlineDiary](http://upload-images.jianshu.io/upload_images/1606489-1c803e800f7977df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](resource/Home-page.png)
+
+### Function
+- Diary CURD
+- Category CURD
+- User login,upload icon,update
+- Display based on release date
+- Display based on category
+- Fuzzy query based on title
 
 ### Thanks
 
 Homepage-Logo reference: [Coding logo](https://coding.net/)
 
-Web text editor framework: [CKEditor](http://ckeditor.com)
+Rich text editor framework: [CKEditor](http://ckeditor.com)
