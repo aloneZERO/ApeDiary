@@ -1,10 +1,10 @@
 # LeoDiary
 **A Simple Diary App**
 
-### Home Page
+## Home Page
 ![](others/Home-page.png)
 
-### Function
+## Function
 - Diary CURD
 - Category CURD
 - User login,upload icon,update
@@ -12,7 +12,7 @@
 - Display based on category
 - Fuzzy query based on title
 
-### Thanks
+## Thanks
 
 Homepage-Logo reference: [Coding logo](https://coding.net/)
 
