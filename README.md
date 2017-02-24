@@ -2,7 +2,7 @@
 **A Simple Diary App**
 
 ### Home Page
-![](resource/Home-page.png)
+![](others/Home-page.png)
 
 ### Function
 - Diary CURD
