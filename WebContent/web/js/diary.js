@@ -5,7 +5,7 @@ $(document).ready(function(){
 			$('#error').html("标题不能为空！");
 			return false;
 		}
-		if($('#typeId').val()==null||$('#typeId').val().trim().length==0){
+		if($('#categoryId').val()==null||$('#categoryId').val().trim().length==0){
 			$('#error').html("请选择日记类别！");
 			return false;
 		}
@@ -16,6 +16,6 @@ $(document).ready(function(){
 // 日记删除时的弹窗确认
 function diaryDel(diaryId){
 	if(confirm("确定要删除此日记吗？")){
-		window.location="diary?action=delete&diaryId="+diaryId;
+		window.location="diary?action=del&diaryId="+diaryId;
 	}
 }

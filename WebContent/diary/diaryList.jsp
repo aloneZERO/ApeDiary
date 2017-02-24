@@ -9,17 +9,22 @@
 		</div>
 		<div class="diary_datas">
 			<ul>
-				<c:forEach var="diary" items="${diaryList }">
+				<c:forEach var="diary" items="${page.records}">
 					<li>
 						『<fmt:formatDate value="${diary.releaseDate}" type="date" pattern="yyyy-MM-dd"/>』
-						<span>&nbsp;<a href="diary?action=show&diaryId=${diary.diaryId}">${diary.title }</a></span>
+						<span>&nbsp;
+						  <a href="${pageContext.request.contextPath}/client/diary?action=readUI&diaryId=${diary.id}">
+						    ${diary.title}
+						</a></span>
 					</li>
 				</c:forEach>
 			</ul>
 		</div>
 		<div class="row">
 			<nav class="col-md-offset-2">
-				<ul class="pagination">${pagination }</ul>
+				<ul class="pagination">
+				  <jsp:include page="/common/pagination.jsp"/>
+				</ul>
 			</nav>
 		</div>
 </div>

@@ -7,19 +7,25 @@
 			<img src="${pageContext.request.contextPath}/web/images/diary_add_icon.png"/>
 			写日记
 		</div>
-		<form action="diary?action=save&diaryId=${diary.getDiaryId()}" method="post" onsubmit="return checkForm()" id="diaryForm">
+		<form action="${pageContext.request.contextPath}/client/diary?action=save"
+		  method="post" onsubmit="return checkForm()" id="diaryForm">
+		  <input type="hidden" value="${diary.id}" name="id"/>
+		  
 			<div class="diary_title form-group">
 				<label class="sr-only" for="title">日记标题</label>
-				<input type="text" class="input-lg" id="title" name="title" value="${diary.title}" placeholder="日记标题..." style="height: 40px;"/>
+				<input type="text" class="input-lg" id="title" name="title" value="${diary.title}"
+				  placeholder="日记标题..." style="height: 40px;"/>
 			</div>
 			<div class="form-group">
 				<textarea class="ckeditor form-control" id="content" name="content">${diary.content}</textarea>
 			</div>
 			<div class="diary_type form-group">
-				<select id="typeId" name="typeId" class="form-control">
-					<option value="">请选择日记类别...</option>
-					<c:forEach var="diaryTypeCount" items="${diaryTypeCountList }">
-						<option value="${diaryTypeCount.diaryTypeId }" ${diaryTypeCount.diaryTypeId==diary.typeId?'selected':''} >${diaryTypeCount.typeName}</option>
+				<select id="categoryId" name="categoryId" class="form-control">
+					<option value="">请选择日记分类...</option>
+					<c:forEach var="category" items="${categories}">
+						<option value="${category.id}" ${category.id==diary.category.id?'selected':''}>
+							${category.name}
+						</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -28,7 +34,8 @@
 					<input type="submit" class="btn btn-primary form-control" value="保存"/>
 				</div>
 				<div class="col-md-2">
-					<button class="btn btn-primary form-control" type="button" onclick="javascript:history.back()">返回</button>
+					<button class="btn btn-primary form-control" type="button"
+					 onclick="javascript:history.back()">返回</button>
 				</div>
 				<font id="error" color="red">${error}</font>
 			</div>

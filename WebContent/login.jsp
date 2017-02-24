@@ -1,41 +1,12 @@
-<%@page import="java.net.URLDecoder"%>
-<%@page import="com.leo.model.User"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%
-	/* Rmember-me涉及到两种场景
-	 * 1.用户直接登录，此时读取cookie
-	 * 2.用户返回登录页面
-	 *
-	 * 根据请求是否存在user对象来判断是哪种场景
-	 */
-	if(request.getAttribute("user")==null) {
-		String userName = null;
-		String password = null;
-		
-		Cookie[] cookies = request.getCookies();
-		for(int i=0; cookies!=null&&i<cookies.length; i++) {
-			if(cookies[i].getName().equals("user")) {
-				userName = URLDecoder.decode(cookies[i].getValue(),"utf-8").split("-")[0];
-				password = URLDecoder.decode(cookies[i].getValue(),"utf-8").split("-")[1];
-				break;
-			}
-		}
-		if("null".equals(userName)||userName==null) {
-			userName = "";
-		}
-		if("null".equals(password)||password==null) {
-			password = "";
-		}
-		pageContext.setAttribute("user", new User(userName,password));
-	}
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Sign In - Online Diary</title>
+	<title>Sign In - Leo Diary</title>
 	<link rel="icon" href="${pageContext.request.contextPath}/web/images/web-icon.png" type="image/x-icon"/>
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-theme.min.css" />
@@ -46,8 +17,12 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/web/js/login.js"></script>
 </head>
 <body>
+  <c:if test="${sessionScope.currentUser != null}">
+     <jsp:forward page="/client/home?re=zero"/>
+  </c:if>
 	<div class="container">
-		<form role="form" id="loginForm" class="form-signin" action="login" method="post">
+		<form role="form" id="loginForm" class="form-signin" method="post"
+		  action="${pageContext.request.contextPath}/client/user?action=userLogin">
 			<h1 class="form-signin-heading">猿日记</h1>
 			<br>
 			<div class="form-group">
@@ -55,7 +30,8 @@
 					<div class="input-group-addon">
 						<img alt="Username" src="${pageContext.request.contextPath}/web/images/user_icon.png">
 					</div>
-					<input  type="text" style="margin: 0px;" class="form-control" id="userName" name="userName" value="${user.getUserName()}" placeholder="猿名...">
+					<input  type="text" style="margin: 0px;" class="form-control"
+					id="username" name="username" value="${user.username}" placeholder="猿名..."/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -63,13 +39,14 @@
 					<div class="input-group-addon">
 						<img alt="password" src="${pageContext.request.contextPath}/web/images/password_icon.png">
 					</div>
-					<input  type="password" style="margin-bottom: 0px;" class="form-control" id="password" name="password" value="${user.getPassword()}" placeholder="猿码..." >
+					<input  type="password" style="margin-bottom: 0px;" class="form-control"
+					id="password" name="password" value="${user.password}" placeholder="猿码..." />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="sr-only" for="remember">Remember me</label>
-				<input type="checkbox" id="remember" name="remember" value="remember-me">&nbsp;眼熟我
-				&nbsp;&nbsp;<font id="error" color="red">${error}</font>
+				<input type="checkbox" id="remember" name="remember" value="remember-me">&nbsp;眼熟我&nbsp;&nbsp;
+				<font id="error" color="red">${error}</font>
 			</div>
 			<div class="row">
 				<div class="login-btn col-md-5">
