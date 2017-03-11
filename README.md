@@ -1,16 +1,18 @@
 # LeoDiary
-**A Simple Diary App**
+**A Simple WebApp for Diary**
 
 ## Home Page
 ![](others/Home-page.png)
 
 ## Function
-- Diary CURD
-- Category CURD
-- User login,upload icon,update
-- Display based on release date
-- Display based on category
+- Diary management
+- Category management
+- User management
 - Fuzzy query based on title
+
+## Skill
+- front-end: JSP/Bootstrap3
+- back-end: Servlet
 
 ## Thanks
 
