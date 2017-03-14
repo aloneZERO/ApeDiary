@@ -1,4 +1,4 @@
-# LeoDiary
+# ApeDiary（猿日记）
 **A Simple WebApp for Diary**
 
 ## Home Page
@@ -11,8 +11,9 @@
 - Fuzzy query based on title
 
 ## Skill
-- front-end: JSP/Bootstrap3
-- back-end: Servlet
+- Front-end: JSP/Bootstrap3
+- Back-end: Servlet
+- Database: MySQL 5.7
 
 ## Thanks
 
