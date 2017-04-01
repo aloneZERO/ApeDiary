@@ -12,8 +12,10 @@ public class ConfigUtilsTest {
 	
 	@Test
 	public void testConfigUtils() {
+		System.out.println("配置工具类测试 =======================");
 		System.out.println(InitUtils.getProperty(""));
 		System.out.println(InitUtils.getProperty("pageSize"));
+		System.out.println("====================================\n");
 	}
 	
 }

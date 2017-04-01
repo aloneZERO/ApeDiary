@@ -17,9 +17,11 @@ public class DBCPUtilsTest {
 	 */
 	@Test
 	public void testDataSource() {
+		System.out.println("数据源测试 ===========================");
 		DataSource dataSource = DBCPUtils.getDataSource();
 		Assert.assertNotNull(dataSource);
 		System.out.println(dataSource.getClass());
+		System.out.println("=====================================\n");
 	}
 	
 	/*
@@ -27,9 +29,11 @@ public class DBCPUtilsTest {
 	 */
 	@Test
 	public void testConnect() {
+		System.out.println("数据库连接测试 =======================");
 		Connection conn = DBCPUtils.getConnection();
 		Assert.assertNotNull(conn);
 		System.out.println(conn.getClass());
+		System.out.println("====================================\n");
 	}
 	
 }

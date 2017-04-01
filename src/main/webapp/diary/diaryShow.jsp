@@ -16,7 +16,7 @@
 			<div class="diary_content">${diary.content}</div>
 			<div class="diary_action">
 				<button class="btn btn-primary" type="button"
-		      onclick="javascript:window.location='${pageContext.request.contextPath}/client/apediary?action=writeUI&diaryId=${diary.id}'">
+		      onclick="javascript:window.location='${pageContext.request.contextPath}/client/diary?action=writeUI&diaryId=${diary.id}'">
 		                    修改日记
 	      </button>
 				<button class="btn btn-primary" type="button" onclick="javascript:history.back()">返回</button>

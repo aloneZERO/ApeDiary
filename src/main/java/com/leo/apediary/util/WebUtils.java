@@ -11,6 +11,7 @@ public class WebUtils {
 	 * @param clazz
 	 * @return bean 实例
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T fillBean(HttpServletRequest request, Class<T> clazz) {
 		try {
 			T bean = clazz.newInstance();
