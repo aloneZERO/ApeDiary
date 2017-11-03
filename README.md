@@ -1,4 +1,5 @@
 # ApeDiary（猿日记）
+[![Build Status](https://travis-ci.org/aloneZERO/ape-diary.svg?branch=master)](https://travis-ci.org/aloneZERO/ape-diary)
 **A Simple WebApp for Diary**
 
 ## Home Page
