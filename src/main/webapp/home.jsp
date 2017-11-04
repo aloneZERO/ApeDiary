@@ -11,7 +11,7 @@
 	<link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" rel="stylesheet">
 	<script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script src="https://cdn.bootcss.com/ckeditor/4.3.2/ckeditor.min.js"></script>
+	<script src="https://cdn.bootcss.com/ckeditor/4.7.3/ckeditor.js"></script>
 	
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/web/css/main.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/web/css/diary.css" />

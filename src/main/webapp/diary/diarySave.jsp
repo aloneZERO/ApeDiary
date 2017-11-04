@@ -17,7 +17,7 @@
 				  placeholder="日记标题..." style="height: 40px;"/>
 			</div>
 			<div class="form-group">
-				<textarea class="ckeditor form-control" id="content" name="content">${diary.content}</textarea>
+				<textarea name="content" class="form-control" id="content">${diary.content}</textarea>
 			</div>
 			<div class="diary_type form-group">
 				<select id="categoryId" name="categoryId" class="form-control">
@@ -41,3 +41,7 @@
 			</div>
 		</form>
 </div>
+
+<script type="text/javascript">
+    CKEDITOR.replace('content');
+</script>
